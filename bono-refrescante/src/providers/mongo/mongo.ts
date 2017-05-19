@@ -18,12 +18,17 @@ export class MongoProvider {
   getUsuarios (){
     let usuarios = this.http.get("http://localhost:3000/api/pub/usuarios");
     return usuarios;
-  }
+  };
 
   // ##Permite introducir un usuario en la base de datos
   postUsuarios(){
 
   };
+
+  getBono(id){
+    let bonos = this.http.get("http://localhost:3000/api/pub/bono/"+id);
+    return bonos;
+  }
   
 
 

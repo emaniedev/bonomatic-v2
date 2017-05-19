@@ -97,12 +97,24 @@ var bonos = mongoose.Schema({
         required : [true, "Se necesita un link a una imagen."]
     },
     link : String,
-    coordenadas : String,
-    usado : Boolean
+    coordenadas : String
+},
+{
+    toObject: {
+        transform: function(doc,ret) {
+            delete ret._id;
+        }
+    },
+    toJSON: {
+        transform : function(doc,ret){
+            delete ret._id;
+        }
+    }
 });
+bonos.set("toJSON",{virtuals: true});
 
 // ##Exportamos el modelo de los bonos
-module.exports.bonos = bonos;
+module.exports.bonos = mongoose.model("bonos",bonos);
 
 // ##Creamos el Schema para los Eventos 
 var eventos = mongoose.Schema({

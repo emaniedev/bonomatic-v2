@@ -14,7 +14,25 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <ion-card *ngFor="let bono of listaBonos" >
+      <!--ion-card-->
+      <img src="{{bono[0].imagen}}" alt="">
+      <ion-card-header>
+        {{bono[0].nombre}}
+        
+      </ion-card-header>
+
+      <ion-card-content>
+        <strong>Fecha:</strong>{{bono[0].fecha}}
+        <p>{{bono[0].descripcion}}</p>
+        
+      </ion-card-content>
+
+    </ion-card>
+
+
+
+  <!--ion-list>
     <ion-item>
       <h3>ID:</h3>
       {{usuario._id}}
@@ -39,5 +57,5 @@
       <h3>Tipo</h3>
       {{usuario.tipo}}
     </ion-item>
-  </ion-list>
+  </ion-list-->
 </ion-content>

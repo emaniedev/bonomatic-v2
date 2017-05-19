@@ -8,6 +8,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import {AdminDbPage} from '../pages/admin-db/admin-db';
 import {AdminDbDetallesPage} from '../pages/admin-db-detalles/admin-db-detalles';
+import {VistaBonoPage} from '../pages/vista-bono/vista-bono';
+import {AsociarPage} from '../pages/asociar/asociar';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,7 +22,9 @@ import { MongoProvider } from '../providers/mongo/mongo';
     HomePage,
     ListPage,
     AdminDbPage,
-    AdminDbDetallesPage
+    AdminDbDetallesPage,
+    VistaBonoPage,
+    AsociarPage
   ],
   imports: [
     BrowserModule,
@@ -33,13 +37,16 @@ import { MongoProvider } from '../providers/mongo/mongo';
     HomePage,
     ListPage,
     AdminDbPage,
-    AdminDbDetallesPage
+    AdminDbDetallesPage,
+    VistaBonoPage,
+    AsociarPage
     
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}, MongoProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, 
+    MongoProvider
   ]
 })
 export class AppModule {}

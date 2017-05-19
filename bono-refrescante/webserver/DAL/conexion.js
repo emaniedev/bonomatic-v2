@@ -42,6 +42,10 @@ var modelo = require("./DAL_usuarios.js")
         return modelo.usuarios;
     }
 
+    var getModelBono = function(){
+        return modelo.bonos;
+    }
+
 /***
         Para Debug **************************
 */
@@ -81,6 +85,7 @@ var modelo = require("./DAL_usuarios.js")
     module.exports.texto = texto;
     module.exports.crearConexion = crearConexion;
     module.exports.getModelUsuario = getModelUsuario;
+    module.exports.getModelBono = getModelBono;
     module.exports.cerrarConexion = cerrarConexion;
     
 

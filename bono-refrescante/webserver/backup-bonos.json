@@ -1,0 +1,35 @@
+[
+    {
+        "nombre": "Desayuno",
+        "fecha": "2017-06-08",
+        "horainicio": "2017-06-08 09:00:00.000Z",
+        "horafin" : "2017-06-08 11:00:00.000Z",
+        "lugar" : "Carpa Comedor",
+        "descripcion" : "Desayuno motero formado por café, té o colacao acompañado por bollería",
+        "imagen" : "https://www.google.es/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj4udGc7L_TAhWCK8AKHQiACkQQjRwIBw&url=https%3A%2F%2Fwww.boletus.com%2Fofertas%3Fkeywords%3DCAFE&psig=AFQjCNFocdSEKbvINPxTToLr7kSvi_3Fdg&ust=1493217874946236",
+        "link" : "",
+        "coordenadas" : ""
+    },
+    {
+        "nombre": "Desayuno",
+        "fecha": "2017-06-09",
+        "horainicio":"2017-06-09 09:00:00.000Z",
+        "horafin" : "2017-06-09 11:00:00.000Z",
+        "lugar" : "Carpa Comedor",
+        "descripcion" : "Desayuno motero formado por café, té o colacao acompañado por bollería",
+        "imagen" : "https://www.google.es/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj4udGc7L_TAhWCK8AKHQiACkQQjRwIBw&url=https%3A%2F%2Fwww.boletus.com%2Fofertas%3Fkeywords%3DCAFE&psig=AFQjCNFocdSEKbvINPxTToLr7kSvi_3Fdg&ust=1493217874946236",
+        "link" : "",
+        "coordenadas" : ""
+    },
+    {
+        "nombre": "Desayuno",
+        "fecha": "2017-06-10",
+        "horainicio":"2017-06-10 09:00:00.000Z",
+        "horafin" : "2017-06-10 11:00:00.000Z",
+        "lugar" : "Carpa Comedor",
+        "descripcion" : "Desayuno motero formado por café, té o colacao acompañado por bollería",
+        "imagen" : "https://www.google.es/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj4udGc7L_TAhWCK8AKHQiACkQQjRwIBw&url=https%3A%2F%2Fwww.boletus.com%2Fofertas%3Fkeywords%3DCAFE&psig=AFQjCNFocdSEKbvINPxTToLr7kSvi_3Fdg&ust=1493217874946236",
+        "link" : "",
+        "coordenadas" : ""
+    }
+]

@@ -19,7 +19,6 @@ app.get("/api/pub/usuarios", function (req, res, next) {
     console.log(conexion);
     var usuarios = conexion.getModelUsuario();
     
-    var listaUsuarios;
     usuarios.find({}).limit(20)
     .exec(function(err, users){
         if(!err){
@@ -41,6 +40,22 @@ app.get("/api/pub/usuarios", function (req, res, next) {
 
     var usuario;
     usuarios.find({_id : req})
+})
+
+//GET de bonos          TODO: Buscar la forma de que salgan los del usuario.
+.get("/api/pub/bono/:id",function(req,res, next){
+    conexion.crearConexion(path);
+    console.log(conexion);
+    var bonos = conexion.getModelBono();
+    console.log("Esta es la variable req :-> " + req);
+    bonos.find({_id: req.params.id}).exec(function(err,bono){
+        if(!err){
+            res.json(bono);
+        }else{
+            res.send("No se han podido conseguir los bonos y esto es lo que trae req " + req)
+        }
+        console.log(res);
+    });
 })
 
 // ##Definimos el post a usuarios.

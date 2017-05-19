@@ -14,7 +14,9 @@ import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
 @Component({
   selector: 'page-admin-db',
   templateUrl: 'admin-db.html',
-  providers: [MongoProvider]
+  providers: [
+    MongoProvider
+    ]
 })
 export class AdminDbPage {
   public usuariosEncontrados;
