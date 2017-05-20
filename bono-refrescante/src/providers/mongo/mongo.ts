@@ -19,6 +19,10 @@ export class MongoProvider {
     let usuarios = this.http.get("http://localhost:3000/api/pub/usuarios");
     return usuarios;
   };
+  getUsuario(inscripcion : Number){
+    let usuario = this.http.get("http://localhost:3000/api/pub/usuario/inscripcion/"+inscripcion);
+    return usuario;
+  }
 
   // ##Permite introducir un usuario en la base de datos
   postUsuarios(){

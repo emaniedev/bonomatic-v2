@@ -19,18 +19,22 @@
 
   <ion-item>
     <ion-label floating>Inscripcion</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="inscripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Documento Identificador</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="dni" type="text" ></ion-input>
   </ion-item>
   <ion-item>
-    <button ion-button block icon-left>
+    <button (click)="login()" ion-button block icon-left>
       <ion-icon name="home"></ion-icon>
       Asociar
     </button>
+    
+  </ion-item>
+  <ion-item>
+    <p [hidden]="error.invisible">{{error.texto}}</p>
   </ion-item>
 
 </ion-list>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { AsociarPage } from './asociar';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { AsociarPage } from './asociar';
   ],
   imports: [
     //IonicModule.forChild(AsociarPage),
+    FormsModule
   ],
   exports: [
     AsociarPage

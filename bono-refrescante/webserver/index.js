@@ -32,14 +32,22 @@ app.get("/api/pub/usuarios", function (req, res, next) {
     conexion.cerrarConexion();
            
     
-}).get("/api/pug/usuario/:id",function(req,res,next){
+}).get("/api/pub/usuario/inscripcion/:ins",function(req,res,next){
 
     conexion.crearConexion(path);
-    console.log(conexion);
+   
     var usuarios = conexion.getModelUsuario();
+    console.log("Este parametro llega-> "+req.params.ins);
 
-    var usuario;
-    usuarios.find({_id : req})
+    usuarios.find({idInscripcion: Number.parseInt(req.params.ins)}).exec(function(err,usr){
+        if (!err){
+            res.json(usr);
+            console.log(usr);
+        }else{
+            res.send("No se ha podido conseguir el usuario.")
+        }
+    })
+    conexion.cerrarConexion();
 })
 
 //GET de bonos          TODO: Buscar la forma de que salgan los del usuario.
