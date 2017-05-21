@@ -32,7 +32,9 @@ export class MongoProvider {
   getBono(id){
     let bonos = this.http.get("http://localhost:3000/api/pub/bono/"+id);
     return bonos;
-  }
+  };
+
+
   
 
 

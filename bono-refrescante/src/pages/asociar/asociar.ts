@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AlertController } from 'ionic-angular';
+
 import {MongoProvider} from '../../providers/mongo/mongo';
 import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
 /**
@@ -14,51 +17,73 @@ import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
   templateUrl: 'asociar.html',
 })
 export class AsociarPage {
+  public myForm
   public inscripcion;
   public dni;
   public usuario;
-  public error = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mongo : MongoProvider) {
-    this.error = {
-      "texto" : "",
-      "invisible" : true
-    };
+  private resultado;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mongo : MongoProvider, public fb:FormBuilder, public alertCtrl: AlertController) {
+    
+    this.myForm = this.fb.group({
+      'inscripcion': ['', [Validators.required,Validators.minLength(4),Validators.maxLength(5)]],
+      'dni': ['', [Validators.required, Validators.pattern(/^[0-9]{8}[-]?[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i)]],
+    });
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AsociarPage');
   }
 
+  //Da acceso a la aplicación.
   login(){
-    if (this.asociar()){
-      this.navCtrl.push(AdminDbDetallesPage, { user : this.usuario.user[0]});
-    } else {
-      this.error= {
-        "texto" : "Fallo al loguear, introduzca bien los datos.",
-        "invisible" : false
-      } ;
-    }
+    this.asociar();
   }
 
-  asociar(){
+  //Hace las comprobaciónes necesarias
+  private comprobar(){
+    
+    if(this.usuario.user.length == 0 || this.usuario.user[0].dni == "error"){
+      
+        this.showAlert();
+
+    }else{
+      if (this.usuario.user[0].dni == this.dni){
+        console.log("usuario validado");
+        this.navCtrl.push(AdminDbDetallesPage, { user : this.usuario.user[0] });
+      }else{
+        console.log("usuario no validado");
+        this.showAlert();
+      }
+    }
+}
+
+  //Realiza la acción de buscar a quien pertenece la subscripcion.
+  private asociar(){
     this.mongo.getUsuario(Number.parseInt(this.inscripcion)).subscribe(
       data => {
         this.usuario = { "user":data.json()};
-        console.log(this.usuario.user[0]);
       },
       err => console.log("Fallo al recuperar usuario. " + err),
-      () => console.log("Usuario recuperado con exito." + this.usuario.user[0].dni)
+      () => this.comprobar()  
     );
-    console.log("Este dni esta -> " + this.dni);
-    console.log("Este inscripcion esta -> " + this.inscripcion);
-    console.log("Este dni traigo -> " + this.usuario.user[0].dni);
-
-    if (this.usuario.user[0].dni == this.dni){
-      return true;
-    }else{
-      return false;
-    }
-
+    
   }
+  // Modal para ver si no se ha logueado correctamente
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Malas credenciales',
+      subTitle: 'Has introducido mal la subscripción o el DNI',
+      buttons: ['Reintentar']
+    });
+    alert.present();
+    this.vaciarCampos();
+  }
+
+  vaciarCampos(){
+   this.inscripcion = "";
+   this.dni = "";
+  }
+
 
 }

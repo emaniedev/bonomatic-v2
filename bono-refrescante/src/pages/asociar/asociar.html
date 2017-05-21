@@ -14,30 +14,55 @@
 
 
 <ion-content padding>
+  <form [formGroup]="myForm" novalidate>
+    <ion-list>
+    <ion-item>
+      <ion-label floating>Inscripcion</ion-label>
+        <ion-input formControlName="inscripcion" [(ngModel)]="inscripcion" type="number"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('inscripcion').errors && myForm.get('inscripcion').dirty">
+        <ion-card *ngIf="myForm.get('inscripcion').hasError('required')">
+          <ion-card-content>
+            <div text-wrap>Este campo debe estar relleno.</div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="myForm.get('inscripcion').hasError('minlength')">
+          <ion-card-content>
+            <div text-wrap>Este campo debe tener como mínimo 4 digitos.</div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="myForm.get('inscripcion').hasError('maxlength')">
+          <ion-card-content>
+            <p text-wrap>Este campo debe tener como máximo 5 digitos.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
 
-  <ion-list>
 
-  <ion-item>
-    <ion-label floating>Inscripcion</ion-label>
-    <ion-input [(ngModel)]="inscripcion" type="text"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Documento Identificador</ion-label>
-    <ion-input [(ngModel)]="dni" type="text" ></ion-input>
-  </ion-item>
-  <ion-item>
-    <button (click)="login()" ion-button block icon-left>
-      <ion-icon name="home"></ion-icon>
-      Asociar
-    </button>
-    
-  </ion-item>
-  <ion-item>
-    <p [hidden]="error.invisible">{{error.texto}}</p>
-  </ion-item>
-
-</ion-list>
+      <ion-item >
+        <ion-label floating>Documento Identificador</ion-label>
+        <ion-input formControlName="dni" [(ngModel)]="dni" type="text" ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty">
+        <ion-card *ngIf="myForm.get('dni').hasError('required')">
+          <ion-card-content>
+            <p text-wrap>Este campo debe estar relleno.</p>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="myForm.get('dni').hasError('pattern')">
+          <ion-card-content>
+            <p text-wrap>Este campo debe tener formato de DNI (00000000-X).</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <button (click)="login()" ion-button block icon-left [disabled]="myForm.invalid">
+          <ion-icon name="home"></ion-icon>
+          Asociar
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
 
 
 </ion-content>

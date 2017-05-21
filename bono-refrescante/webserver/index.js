@@ -12,6 +12,14 @@ var port = 3000;
 
 app.use(express.static(__dirname + "/../www"));
 
+// PERMITIR CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 // ##Definimos el get a usuarios.
 app.get("/api/pub/usuarios", function (req, res, next) {
     
@@ -24,12 +32,12 @@ app.get("/api/pub/usuarios", function (req, res, next) {
         if(!err){
             res.json(users);
         }else{
-            res.send("No se ha podido conseguir los usuarios");
+            res.send({"error" :"No se ha podido conseguir los usuarios"});
         }
         console.log(res);
-    });
+    }).then(conexion.cerrarConexion());
     
-    conexion.cerrarConexion();
+    
            
     
 }).get("/api/pub/usuario/inscripcion/:ins",function(req,res,next){
@@ -44,10 +52,10 @@ app.get("/api/pub/usuarios", function (req, res, next) {
             res.json(usr);
             console.log(usr);
         }else{
-            res.send("No se ha podido conseguir el usuario.")
+            res.send({"dni" :"error"})
         }
-    })
-    conexion.cerrarConexion();
+    }).then(conexion.cerrarConexion());
+   
 })
 
 //GET de bonos          TODO: Buscar la forma de que salgan los del usuario.
@@ -63,8 +71,9 @@ app.get("/api/pub/usuarios", function (req, res, next) {
             res.send("No se han podido conseguir los bonos y esto es lo que trae req " + req)
         }
         console.log(res);
-    });
+    }).then(conexion.cerrarConexion());
 })
+
 
 // ##Definimos el post a usuarios.
 .post("/api/pub/usuarios",function(req, res, next){
@@ -79,7 +88,7 @@ app.get("/api/pub/usuarios", function (req, res, next) {
             res.send("No se ha podido crear el usuario por: " + err)
         }
     })
-    conexion.cerrarConexion();
+    
 });
 
 

@@ -16,9 +16,12 @@ var modelo = require("./DAL_usuarios.js")
         var url = "mongodb://" + path + ":" + port + "/DebugBonomatic";
 
         console.log(url)
-
-        mongoose.connect(url);
-        
+        try {
+            mongoose.connect(url);
+        }
+        catch(err){
+            mongoose.createConnection(url);
+        }
         var db = mongoose.connection;
         
         db.on('error', console.error.bind(console, 'connection error:'));

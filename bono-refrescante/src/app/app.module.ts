@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 
@@ -33,6 +34,7 @@ import { MongoProvider } from '../providers/mongo/mongo';
     FormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule
+    
     
   ],
   bootstrap: [IonicApp],
