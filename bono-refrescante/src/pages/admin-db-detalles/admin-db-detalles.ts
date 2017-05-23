@@ -17,31 +17,24 @@ import {MongoProvider} from '../../providers/mongo/mongo';
 })
 export class AdminDbDetallesPage {
   public usuario;
-  public listaBonos;
-  public listaBonosUsados;
+  public listaBonos = [];
+  public listaBonosUsados = [];
+  public listaFinal= [];
 
 
   constructor(public navCtrl: NavController, public param: NavParams, private mongo : MongoProvider ) {
     this.usuario = param.data.user;
+    var usuario = this.usuario;
+    var listaFinal = this.listaFinal;
     console.log (param);
     console.log(this.usuario)
-    this.getBonos().then(
-      lista => this.ordenarAsignar(lista),
-      err => 
-        console.log("no se ha cumplido la promesa. " + err)
-    )
-    .catch(
-      err => console.log (err)
-    );  
-
-    this.getBonosUsados().then(
-      lista => this.ordenarAsignarUsados(lista),
-      err => 
-        console.log("no se ha cumplido la promesa. " + err)
-    )
-    .catch(
-      err => console.log (err)
-    );  
+    usuario.bonos.forEach(function(bono){
+      usuario.bonosusados.forEach(function(bonousado){
+        if (bono._id != bonousado._id){
+          listaFinal.push(bono);
+        }
+      })
+    })
      
     
   }
@@ -72,10 +65,11 @@ export class AdminDbDetallesPage {
   comprobarUsados(){
     var listaBonos = this.listaBonos;
     var listaBonosUsados = this.listaBonosUsados;
+    var listaFinal = this.listaFinal;
     listaBonos.forEach(function (bono, i){
       listaBonosUsados.forEach(function (bonoU, iU){
         if (bono[0]._id == bonoU[0]._id){
-          listaBonos.pop(i);
+          listaFinal.push(bono[0]);          
         }
       })
     })
@@ -84,10 +78,24 @@ export class AdminDbDetallesPage {
   
   ordenarAsignar(lista){
     console.log("función despues de promise");
-    console.log("ListaBonos -> " + lista);
-    lista.sort(this.sortFunction);
+    debugger;
     this.listaBonos = lista;
-    
+    lista = null;
+    this.listaBonos.sort(function(a,b){  
+                debugger;
+                var dateA = new Date(a.horainicio.toString()).getTime();
+                var dateB = new Date(b.horainicio.toString()).getTime();
+                return dateA > dateB ? 1 : -1;  
+            })
+                this.listaBonos.forEach(function(bono){
+                  console.log("nombre: " + bono[0].nombre);
+                  console.log("Fecha inicio : " + bono[0].horainicio)
+                })
+
+                
+  }
+  encontrarDesayunos(desayuno){
+    return desayuno[0].nombre == "Desayuno";
   }
 
    ordenarAsignarUsados(lista){
@@ -95,10 +103,12 @@ export class AdminDbDetallesPage {
     console.log("ListaBonos -> " + lista);
     lista.sort(this.sortFunction);
     this.listaBonosUsados = lista;
+    this.listaBonosUsados.sort(this.sortFunction);
     this.comprobarUsados();
   }
 
   sortFunction(a,b){  
+    
     var dateA = new Date(a[0].horainicio).getTime();
     var dateB = new Date(b[0].horainicio).getTime();
     return dateA > dateB ? 1 : -1;  

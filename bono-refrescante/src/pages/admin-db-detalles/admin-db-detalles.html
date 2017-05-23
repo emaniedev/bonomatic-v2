@@ -14,17 +14,17 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let bono of listaBonos" >
+  <ion-card *ngFor="let bono of listaFinal" >
       <!--ion-card-->
-      <img src="{{bono[0].imagen}}" alt="">
+      <img src="{{bono.imagen}}" alt="">
       <ion-card-header>
-        {{bono[0].nombre}}
+        {{bono.nombre}}
         
       </ion-card-header>
 
       <ion-card-content>
-        <strong>Fecha:</strong>{{bono[0].fecha}}
-        <p>{{bono[0].descripcion}}</p>
+        <strong>Fecha:</strong>{{bono.horainicio}}
+        <p>{{bono.descripcion}}</p>
         
       </ion-card-content>
 

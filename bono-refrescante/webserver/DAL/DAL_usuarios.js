@@ -51,8 +51,8 @@ var usuarios = mongoose.Schema({
         enum : ["Piloto","Pasajero","Peaton"],
         required : [true, "Introduce un tipo válido(Piloto, Pasajero, Peatón)."]
     },
-    bonos: [mongoose.Schema.Types.ObjectId],
-    bonosusados: [mongoose.Schema.Types.ObjectId],
+    bonos: [{type : mongoose.Schema.Types.ObjectId, ref: 'bonos' }],
+    bonosusados: [{type : mongoose.Schema.Types.ObjectId, ref: 'bonos' }],
     id_inscripcion : {
         type : String,
         required : [true, "Se necesita un numero de inscripcion para poder dar de alta."]

@@ -46,15 +46,32 @@ app.get("/api/pub/usuarios", function (req, res, next) {
    
     var usuarios = conexion.getModelUsuario();
     console.log("Este parametro llega-> "+req.params.ins);
-
-    usuarios.find({idInscripcion: Number.parseInt(req.params.ins)}).exec(function(err,usr){
+    usuarios.find({idInscripcion: Number.parseInt(req.params.ins)})
+    .populate({
+        path: 'bonos',
+        options : { sort: {horainicio : 1}}
+    })
+    .populate({
+        path: 'bonosusados',
+        options : { sort: {horainicio : 1}}
+    })
+    .exec(function(err,usr){
         if (!err){
+            
             res.json(usr);
-            console.log(usr);
         }else{
-            res.send({"dni" :"error"})
+            res.send({"dni" : "error"})
         }
-    }).then(conexion.cerrarConexion());
+    })
+
+    // usuarios.find({idInscripcion: Number.parseInt(req.params.ins)}).exec(function(err,usr){
+//         if (!err){
+//             res.json(usr);
+//             console.log(usr);
+//         }else{
+//             res.send({"dni" :"error"})
+//         }
+//     }).then(conexion.cerrarConexion());
    
 })
 
