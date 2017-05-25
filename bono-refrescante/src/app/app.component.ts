@@ -10,6 +10,8 @@ import {AdminDbPage} from '../pages/admin-db/admin-db';
 import {VistaBonoPage} from '../pages/vista-bono/vista-bono';
 import {AsociarPage} from '../pages/asociar/asociar';
 
+import { CookieService } from 'ng2-cookies';
+
 
 
 @Component({
@@ -21,15 +23,20 @@ export class MyApp {
 
   rootPage: any = AsociarPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, cb? : () => void }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  self = MyApp;
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+  private cookie : CookieService) {
     this.initializeApp();
+    
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Bonos', component: VistaBonoPage } ,
-      {title: "Admin", component: AdminDbPage}
+      {title: "Admin", component: AdminDbPage},
+      {title: "Desasociar", component: AsociarPage}
     ];
 
   }
@@ -46,6 +53,15 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if ( page.title == "Desasociar"){
+      this.desasociar();
+      this.nav.setRoot(page.component);
+    }else {
+      this.nav.setRoot(page.component);
+    }
+  }
+
+  desasociar(){
+    this.cookie.delete("logueado");
   }
 }

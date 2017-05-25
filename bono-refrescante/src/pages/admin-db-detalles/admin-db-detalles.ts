@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MongoProvider} from '../../providers/mongo/mongo';
 /**
@@ -114,34 +115,6 @@ export class AdminDbDetallesPage {
     return dateA > dateB ? 1 : -1;  
 }; 
 
-
-//   getBonos(){
-//     var mongo = this.mongo;
-//     var bonos = this.usuario.bonos;
-//     return new Promise(function(resolve,reject){ 
-//       var listaBonos = [];
-//       var lista;
-//       bonos.forEach(function(bono){
-//         mongo.getBono(bono).subscribe(
-//         data => {
-//           listaBonos.push(data.json());
-//         },
-//         err =>  console.log(err),
-//         () => console.log( listaBonos )
-//         
-//         );
-//       });
-//       lista = listaBonos; 
-//       lista.ready = function (err, lista){
-//         if (err){
-//           return reject(Error("Error al conseguir Bonos"))
-//         }
-//         return resolve(lista);
-//       }
-//     })
-//   }
-
-
     getBonosUsados(){
     var bonos = this.usuario.bonosusados;
     var mongo = this.mongo;
@@ -160,8 +133,6 @@ export class AdminDbDetallesPage {
       resolve(lista);
     })
   }
-    
-  
 
 
 

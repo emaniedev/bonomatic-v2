@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
+import { CookieService } from 'ng2-cookies';
+
 
 
 import { MyApp } from './app.component';
@@ -33,7 +35,8 @@ import { MongoProvider } from '../providers/mongo/mongo';
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+   
     
     
   ],
@@ -52,7 +55,8 @@ import { MongoProvider } from '../providers/mongo/mongo';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}, 
-    MongoProvider
+    MongoProvider,
+     CookieService
   ]
 })
 export class AppModule {}

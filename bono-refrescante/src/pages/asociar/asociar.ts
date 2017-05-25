@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AlertController } from 'ionic-angular';
 
+
+import { CookieService } from 'ng2-cookies';
 import {MongoProvider} from '../../providers/mongo/mongo';
 import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
 /**
@@ -22,12 +24,19 @@ export class AsociarPage {
   public dni;
   public usuario;
   private resultado;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mongo : MongoProvider, public fb:FormBuilder, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mongo : MongoProvider, public fb:FormBuilder, 
+  public alertCtrl: AlertController, private cookie : CookieService) {
     
-    this.myForm = this.fb.group({
-      'inscripcion': ['', [Validators.required,Validators.minLength(4),Validators.maxLength(5)]],
-      'dni': ['', [Validators.required, Validators.pattern(/^[0-9]{8}[-]?[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i)]],
-    });
+    if (this.cookie.check("logueado")){
+      this.inscripcion = this.cookie.get("logueado");
+      this.recuperarUser(); 
+    }
+      this.myForm = this.fb.group({
+        'inscripcion': ['', [Validators.required,Validators.minLength(4),Validators.maxLength(5)]],
+        'dni': ['', [Validators.required, Validators.pattern(/^[0-9]{8}[-]?[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i)]],
+      });
+    
+
   }
   
 
@@ -43,23 +52,33 @@ export class AsociarPage {
   //Hace las comprobaciónes necesarias
   private comprobar(){
     
-    if(this.usuario.user.length == 0 || this.usuario.user[0].dni == "error"){
-      
-        this.showAlert();
+      if(this.usuario.user.length == 0 || this.usuario.user[0].dni == "error"){
+        
+          this.showAlert();
 
-    }else{
-      if (this.usuario.user[0].dni == this.dni){
-        console.log("usuario validado");
-        this.navCtrl.push(AdminDbDetallesPage, { user : this.usuario.user[0] });
       }else{
-        console.log("usuario no validado");
-        this.showAlert();
+        if (this.usuario.user[0].dni == this.dni){
+          console.log("usuario validado");
+          this.navCtrl.setRoot(AdminDbDetallesPage, { user : this.usuario.user[0] });
+          this.cookie.set("logueado", this.inscripcion);
+        }else{
+          console.log("usuario no validado");
+          this.showAlert();
+        }
       }
-    }
+}
+private recuperarUser(){
+  this.mongo.getUsuario(Number.parseInt(this.inscripcion)).subscribe(
+      data => {
+        this.usuario = { "user":data.json()};
+      },
+      err => console.log("Fallo al recuperar usuario. " + err),
+      () => this.navCtrl.setRoot(AdminDbDetallesPage, { user : this.usuario.user[0] })
+    );
 }
 
   //Realiza la acción de buscar a quien pertenece la subscripcion.
-  private asociar(){
+  private asociar(cb?){
     this.mongo.getUsuario(Number.parseInt(this.inscripcion)).subscribe(
       data => {
         this.usuario = { "user":data.json()};
