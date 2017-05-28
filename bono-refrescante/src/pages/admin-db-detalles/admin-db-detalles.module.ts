@@ -6,9 +6,7 @@ import { AdminDbDetallesPage } from './admin-db-detalles';
   declarations: [
     AdminDbDetallesPage,
   ],
-  imports: [
-    //IonicModule.forChild(AdminDbDetallesPage),
-  ],
+  imports: [],
   exports: [
     AdminDbDetallesPage
   ]

@@ -5,10 +5,13 @@ import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
 
 
 /**
+ * @module AdminDbPage AdminDbPage
+ *@parent MyApp
  * Generated class for the AdminDbPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
+ *@memberOf MyApp
  */
 @IonicPage()
 @Component({
@@ -19,8 +22,19 @@ import {AdminDbDetallesPage} from '../admin-db-detalles/admin-db-detalles';
     ]
 })
 export class AdminDbPage {
+  // Contiene una lista con todos los usuarios de la aplicación
   public usuariosEncontrados;
 
+/**
+ * @function constructor
+ *
+ * Instancia AdminDbPage
+ * 
+ * @param {MongoProvider} mongo
+ * @param {NavController} nav
+ * 
+ * @parent AdminDbPage
+ */
   constructor(private mongo : MongoProvider, private nav : NavController) {
   }
 
@@ -28,6 +42,19 @@ export class AdminDbPage {
     console.log('ionViewDidLoad AdminDbPage');
   }
 
+  /**
+   *@function getUsuarios()
+   * Función que nos da acceso a los usuarios de la BD.
+   * Los mete en un objeto llamado data.
+   *
+   *@param data
+   *Este objeto contiene el usuario en cuestión, se pasa a json y se asigna
+   *@param err
+   *Si da error se ejecuta lo que este en este parametro
+   *@param funcion
+   * Cuando se completa la consulta a la bd se lanza la función que pongamos aqui.
+   * @memberOf AdminDbPage
+   */
   getUsuarios(){
     this.mongo.getUsuarios().subscribe(
       data => {
@@ -38,6 +65,15 @@ export class AdminDbPage {
     );
   };
 
+/**
+ * @function details
+ *
+ *Nos lleva a una página de detalles del usuario en cuestión.
+ * 
+ * @param {any} user
+ * 
+ * @memberOf AdminDbPage
+ */
   details(user){
     this.nav.push(AdminDbDetallesPage, {user:user});
     

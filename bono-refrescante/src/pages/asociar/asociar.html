@@ -1,8 +1,5 @@
 <!--
-  Generated template for the AsociarPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+ Página en la que se muestra el formulario que asocia la aplicación con un usuario y una inscripción concreta.
 -->
 <ion-header>
 
@@ -14,13 +11,22 @@
 
 
 <ion-content padding>
+  <!--Creamos un formGroup, de esta manera en el controlador tenemos acceso directo al formulario y podemos asignar las validaciones-->
   <form [formGroup]="myForm" novalidate>
+    <!--Creamos una lista con los items que necesitemos, de esta forma está mas organizado.-->
     <ion-list>
-    <ion-item>
-      <ion-label floating>Inscripcion</ion-label>
-        <ion-input formControlName="inscripcion" [(ngModel)]="inscripcion" type="number"></ion-input>
+      <!--Creamos un item dentro de la lista que va a contener un input con su label-->
+      <ion-item>
+        <ion-label floating>Inscripcion</ion-label>
+        <!--El parametro formControlName da nombre al input dentro del formulario, así podemos acceder a su contenido a través 
+        de este nombre.-->
+          <ion-input formControlName="inscripcion" [(ngModel)]="inscripcion" type="number"></ion-input>
       </ion-item>
+      <!--En este item controlamos los textos de validación que se muestran relacionados con la propiedad inscripción del formulario-->
+      <!--Se consigue incluyendo la propiedad *ngIf en el nodo, si se cumple, pasa a mostrar el error concreto-->
+      <!--Si se cumple que hay errores y que el campo está "dirty"(sucio)-->
       <ion-item *ngIf="myForm.get('inscripcion').errors && myForm.get('inscripcion').dirty">
+        <!--Se comprueba que tipo de error ha llegado y se muestra el que sea, ya sea 1, 2 o los 3.-->
         <ion-card *ngIf="myForm.get('inscripcion').hasError('required')">
           <ion-card-content>
             <div text-wrap>Este campo debe estar relleno.</div>
@@ -37,8 +43,7 @@
           </ion-card-content>
         </ion-card>
       </ion-item>
-
-
+      <!--Volvemos a crear otro item con las mismas características del anterior-->
       <ion-item >
         <ion-label floating>Documento Identificador</ion-label>
         <ion-input formControlName="dni" [(ngModel)]="dni" type="text" ></ion-input>
@@ -55,6 +60,10 @@
           </ion-card-content>
         </ion-card>
       </ion-item>
+
+      <!--Por último creamos un botón de login con la propiedad disabled asociada a una propiedad en nuestro controler.-->
+      <!--De esta forma conseguimos que nuestro botón esté deshabilitado hasta que todas las normas de validación se 
+      cumplan-->
       <ion-item>
         <button (click)="login()" ion-button block icon-left [disabled]="myForm.invalid">
           <ion-icon name="home"></ion-icon>

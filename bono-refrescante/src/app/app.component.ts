@@ -12,7 +12,14 @@ import {AsociarPage} from '../pages/asociar/asociar';
 
 import { CookieService } from 'ng2-cookies';
 
-
+/**
+ *
+ * Clase que contiene toda la aplicación
+ * 
+ * @export
+ * @module MyApp
+ *@parent index
+ */
 
 @Component({
   templateUrl: 'app.html',
@@ -20,13 +27,38 @@ import { CookieService } from 'ng2-cookies';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  /**
+   * @property rootPage
+   *
+   *Dicta cual es la página raíz
+   * 
+   * @type {*}
+   * @memberOf MyApp
+   */
   rootPage: any = AsociarPage;
-
+ /**
+  * @property pages
+  *
+  *Incluye en un array todas las páginas de la aplicación
+  *
+  * @memberOf MyApp
+  */
   pages: Array<{title: string, component: any, cb? : () => void }>;
 
   self = MyApp;
 
+  /**
+   * @function constructor
+   *
+   *Crea una instancia de la clase MyApp
+   * 
+   * @param {Platform} platform
+   * @param {StatusBar} statusBar
+   * @param {SplashScreen} splashScreen
+   * @param {CookieService} cookie
+   * 
+   * @memberOf MyApp
+   */
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
   private cookie : CookieService) {
     this.initializeApp();
@@ -40,7 +72,13 @@ export class MyApp {
     ];
 
   }
-
+  /**
+   * @function initializeApp
+   *
+   *Inicializa las variables necesarias para que la aplicación arranque.
+   * 
+   * @memberOf MyApp
+   */
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -60,7 +98,13 @@ export class MyApp {
       this.nav.setRoot(page.component);
     }
   }
-
+/**
+ *@function desasociar()
+ * Función que nos permite desasociar nuestra aplicación de la inscripción activa, borra la cookie para que no se vuelva a autologuear.
+ * @param void
+ *
+ * @parent MyApp
+* */
   desasociar(){
     this.cookie.delete("logueado");
   }

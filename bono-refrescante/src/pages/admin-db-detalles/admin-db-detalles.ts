@@ -3,10 +3,11 @@ import { Nav, Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MongoProvider} from '../../providers/mongo/mongo';
 /**
+ *@module AdminDbDetallesPage AdminDbDetallesPage
+ @parent MyApp
  * Generated class for the AdminDbDetallesPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * @memberOf MyApp
  */
 @IonicPage()
 @Component({
@@ -17,25 +18,36 @@ import {MongoProvider} from '../../providers/mongo/mongo';
     ]
 })
 export class AdminDbDetallesPage {
+  /**
+   *@property usuarios
+   * Contiene el objeto del usuario que ha entrado en esta vista.
+   * @memberOf AdminDbDetallesPage
+   */
   public usuario;
-  public listaBonos = [];
-  public listaBonosUsados = [];
+
+
+
+  /**
+   *@property listaFinal
+   * Contiene la lista de bonos que se muestra al final, despues de haber realizado
+   * el filtrado de si lo ha usado o no.
+   * @memberOf AdminDbDetallesPage
+   */
   public listaFinal= [];
 
-
+  /**
+   *@function Constructor()
+   * Crea una instancia de la Clase. En el parámetro param nos llega el usuario que ha llamado ha esta vista.
+   * 
+   * @param {NavController} navCtrl
+   * @param {NavParams} param
+   * @param {MongoProvider} mongo
+   * 
+   * @memberOf AdminDbDetallesPage
+   */
   constructor(public navCtrl: NavController, public param: NavParams, private mongo : MongoProvider ) {
     this.usuario = param.data.user;
-    var usuario = this.usuario;
-    var listaFinal = this.listaFinal;
-    console.log (param);
-    console.log(this.usuario)
-    usuario.bonos.forEach(function(bono){
-      usuario.bonosusados.forEach(function(bonousado){
-        if (bono._id != bonousado._id){
-          listaFinal.push(bono);
-        }
-      })
-    })
+    this.conseguirLista();
      
     
   }
@@ -43,6 +55,32 @@ export class AdminDbDetallesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminDbDetallesPage');
   }
+
+  
+  /**
+   * @function conseguirLista
+   *
+   *Nos crea una lista de los bonos que aún están por usar, usa la lista de bonos que tiene el usuario y quita los bonos que ya a gastado.
+   * @param void
+   * 
+   * @memberOf AdminDbDetallesPage
+   */
+  conseguirLista() {
+    var usuario = this.usuario;
+    var listaFinal = this.listaFinal;
+    usuario.bonos.forEach(function (bono) {
+      usuario.bonosusados.forEach(function (bonousado) {
+        if (bono._id != bonousado._id) {
+          listaFinal.push(bono);
+        }
+      })
+    })
+  }
+
+  /// -- El código de aqui era todo el código que llevaba esta vista cuando no era capaz de hacer
+  /// -- un JOIN con MongoDB. Una vez supe hacer la consulta con el JOIN todo se resumio a navegar por el 
+  /// -- objeto que tengo en la variable usuario.
+  /*
 
   getBonos(){
     var bonos = this.usuario.bonos;
@@ -95,25 +133,6 @@ export class AdminDbDetallesPage {
 
                 
   }
-  encontrarDesayunos(desayuno){
-    return desayuno[0].nombre == "Desayuno";
-  }
-
-   ordenarAsignarUsados(lista){
-    console.log("función despues de promise");
-    console.log("ListaBonos -> " + lista);
-    lista.sort(this.sortFunction);
-    this.listaBonosUsados = lista;
-    this.listaBonosUsados.sort(this.sortFunction);
-    this.comprobarUsados();
-  }
-
-  sortFunction(a,b){  
-    
-    var dateA = new Date(a[0].horainicio).getTime();
-    var dateB = new Date(b[0].horainicio).getTime();
-    return dateA > dateB ? 1 : -1;  
-}; 
 
     getBonosUsados(){
     var bonos = this.usuario.bonosusados;
@@ -133,6 +152,7 @@ export class AdminDbDetallesPage {
       resolve(lista);
     })
   }
+  */
 
 
 

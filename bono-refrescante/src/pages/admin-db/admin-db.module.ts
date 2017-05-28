@@ -7,10 +7,7 @@ import { AdminDbPage } from './admin-db';
   declarations: [
     AdminDbPage,
   ],
-  imports: [
-    
-    //IonicModule.forChild(AdminDbPage)
-  ],
+  imports: [],
   exports: [
     AdminDbPage
   ]

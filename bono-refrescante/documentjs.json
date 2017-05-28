@@ -1,0 +1,10 @@
+{
+    "sites": {
+        "docs": {
+            "parent" : "index",
+            "glob": "src/**/*.{ts,md}",
+            "out": "api"
+        }
+        
+    }
+}

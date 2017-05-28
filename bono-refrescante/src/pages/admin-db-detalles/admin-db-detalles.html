@@ -14,27 +14,21 @@
   </ion-navbar>
 </ion-header>
 
-
-
-
 <ion-content padding>
+  
+  <!--Utilizamos un ForEach para mostrar todo el contenido-->
   <ion-card *ngFor="let bono of listaFinal" >
       <!--ion-card-->
       <img src="{{bono.imagen}}" alt="">
       <ion-card-header>
-        {{bono.nombre}}
-        
+        {{bono.nombre}}   
       </ion-card-header>
-
       <ion-card-content>
         <strong>Fecha:</strong>{{bono.horainicio}}
-        <p>{{bono.descripcion}}</p>
-        
+        <p>{{bono.descripcion}}</p>        
       </ion-card-content>
 
     </ion-card>
-
-   
-
-  
+    <!--FIN ion-card-->
+ 
 </ion-content>
