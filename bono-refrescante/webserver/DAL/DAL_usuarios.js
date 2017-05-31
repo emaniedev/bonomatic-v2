@@ -12,8 +12,7 @@ var usuarios = mongoose.Schema({
     dni : {
         type : String,
         match : [regDni,"{VALUE} no es ni un NIF ni un NIE valido."],
-        required : [true, "El DNI/NIF no puede estar vacio."]
-        
+        required : [true, "El DNI/NIF no puede estar vacio."]    
     },
     nombre : {
         type : String,
@@ -117,17 +116,17 @@ bonos.set("toJSON",{virtuals: true});
 module.exports.bonos = mongoose.model("bonos",bonos);
 
 // ##Creamos el Schema para los Eventos 
-var eventos = mongoose.Schema({
-    nombre : {
-        type : String,
-        required : [true, "Necesito un nombre para el evento."]
-    },
-    lugar : String,
-    inicio : Date,
-    fin : Date,
-    coordenadas : String,
-    descripcion : String
-})
+//var eventos = mongoose.Schema({
+//    nombre : {
+//        type : String,
+//        required : [true, "Necesito un nombre para el evento."]
+//    },
+//    lugar : String,
+//    inicio : Date,
+//    fin : Date,
+//    coordenadas : String,
+//    descripcion : String
+//})
 
 // ##Exportamos el modelo de los eventos
-module.exports.eventos = eventos;
+//module.exports.eventos = eventos;

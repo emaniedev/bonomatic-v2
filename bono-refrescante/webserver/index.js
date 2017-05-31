@@ -1,3 +1,4 @@
+// Importamos
 var express = require("express");
 var bodyparser = require("body-parser");
 var conexion = require("./DAL/conexion.js");
@@ -62,17 +63,8 @@ app.get("/api/pub/usuarios", function (req, res, next) {
         }else{
             res.send({"dni" : "error"})
         }
-    })
-
-    // usuarios.find({idInscripcion: Number.parseInt(req.params.ins)}).exec(function(err,usr){
-//         if (!err){
-//             res.json(usr);
-//             console.log(usr);
-//         }else{
-//             res.send({"dni" :"error"})
-//         }
-//     }).then(conexion.cerrarConexion());
-   
+    }).then(conexion.cerrarConexion());
+  
 })
 
 //GET de bonos          TODO: Buscar la forma de que salgan los del usuario.

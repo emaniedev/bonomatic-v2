@@ -1,3 +1,4 @@
+//Imports
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -36,13 +37,14 @@ export class MyApp {
    * @memberOf MyApp
    */
   rootPage: any = AsociarPage;
- /**
+
+  /**
   * @property pages
   *
   *Incluye en un array todas las páginas de la aplicación
   *
   * @memberOf MyApp
-  */
+  */  
   pages: Array<{title: string, component: any, cb? : () => void }>;
 
   self = MyApp;
@@ -63,8 +65,6 @@ export class MyApp {
   private cookie : CookieService) {
     this.initializeApp();
     
-
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Bonos', component: VistaBonoPage } ,
       {title: "Admin", component: AdminDbPage},
@@ -100,7 +100,8 @@ export class MyApp {
   }
 /**
  *@function desasociar()
- * Función que nos permite desasociar nuestra aplicación de la inscripción activa, borra la cookie para que no se vuelva a autologuear.
+ * Función que nos permite desasociar nuestra aplicación de la inscripción activa, 
+ * borra la cookie para que no se vuelva a autologuear.
  * @param void
  *
  * @parent MyApp

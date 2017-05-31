@@ -1,11 +1,16 @@
-﻿var mongoose = require("mongoose");
+﻿//Importamos mongoose
+var mongoose = require("mongoose");
+
+//Importamos nuestro modelo
 var modelo = require("./DAL_usuarios.js")
 
 
-//var conexion = function () {
-
-    var texto = "Porque no vas";
-
+/**
+ * Esta función es la encargada de crear una conexión con la base de datos
+ * Utiliza la libreria mongoose
+ * 
+ * @param {String} path 
+ */
     var crearConexion = function (path) {
 
         var user = "admin-bonomatic";
@@ -25,6 +30,10 @@ var modelo = require("./DAL_usuarios.js")
         var db = mongoose.connection;
         
         db.on('error', console.error.bind(console, 'connection error:'));
+
+        /**
+         * nos permite abrir una conexión una sola vez.
+         */
         db.once('open', function () {
             console.log("Estamos Dentro de esta ip: " + path);
         });
@@ -85,6 +94,10 @@ var modelo = require("./DAL_usuarios.js")
 //}
 //module.exports.conexion = conexion;
 
+
+    /**
+     * Exports de nuestra clase.
+     */
     module.exports.texto = texto;
     module.exports.crearConexion = crearConexion;
     module.exports.getModelUsuario = getModelUsuario;
