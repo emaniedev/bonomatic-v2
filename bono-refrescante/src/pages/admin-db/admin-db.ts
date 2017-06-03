@@ -61,7 +61,7 @@ export class AdminDbPage {
         this.usuariosEncontrados = data.json();
       },
       err => console.error(err),
-      () => console.log("getUsuarios completado" + "esto es lo que trae "+ this.usuariosEncontrados[0].nombre)
+      () => console.log("getUsuarios completado" + "esto es lo que trae "+ this.usuariosEncontrados[0])
     );
   };
 

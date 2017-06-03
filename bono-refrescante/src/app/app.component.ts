@@ -9,7 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import {AdminDbPage} from '../pages/admin-db/admin-db';
 import {VistaBonoPage} from '../pages/vista-bono/vista-bono';
-import {AsociarPage} from '../pages/asociar/asociar';
+import { AsociarPage } from '../pages/asociar/asociar';
+import { AdminDbDetallesPage } from '../pages/admin-db-detalles/admin-deb-detalles';
 
 import { CookieService } from 'ng2-cookies';
 
@@ -66,7 +67,7 @@ export class MyApp {
     this.initializeApp();
     
     this.pages = [
-      { title: 'Bonos', component: VistaBonoPage } ,
+      //{ title: 'Bonos', component: VistaBonoPage } ,
       {title: "Admin", component: AdminDbPage},
       {title: "Desasociar", component: AsociarPage}
     ];

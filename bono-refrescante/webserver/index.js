@@ -29,6 +29,14 @@ app.get("/api/pub/usuarios", function (req, res, next) {
     var usuarios = conexion.getModelUsuario();
     
     usuarios.find({}).limit(20)
+        .populate({
+            path: 'bonos',
+            options: { sort: { horainicio: 1 } }
+        })
+        .populate({
+            path: 'bonosusados',
+            options: { sort: { horainicio: 1 } }
+        })
     .exec(function(err, users){
         if(!err){
             res.json(users);
@@ -36,7 +44,7 @@ app.get("/api/pub/usuarios", function (req, res, next) {
             res.send({"error" :"No se ha podido conseguir los usuarios"});
         }
         console.log(res);
-    }).then(conexion.cerrarConexion());
+    })//.then(conexion.cerrarConexion());
     
     
            
@@ -63,7 +71,7 @@ app.get("/api/pub/usuarios", function (req, res, next) {
         }else{
             res.send({"dni" : "error"})
         }
-    }).then(conexion.cerrarConexion());
+    })//.then(conexion.cerrarConexion());
   
 })
 
@@ -80,7 +88,7 @@ app.get("/api/pub/usuarios", function (req, res, next) {
             res.send("No se han podido conseguir los bonos y esto es lo que trae req " + req)
         }
         console.log(res);
-    }).then(conexion.cerrarConexion());
+    })//.then(conexion.cerrarConexion());
 })
 
 

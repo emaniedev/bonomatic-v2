@@ -98,7 +98,6 @@ var modelo = require("./DAL_usuarios.js")
     /**
      * Exports de nuestra clase.
      */
-    module.exports.texto = texto;
     module.exports.crearConexion = crearConexion;
     module.exports.getModelUsuario = getModelUsuario;
     module.exports.getModelBono = getModelBono;
